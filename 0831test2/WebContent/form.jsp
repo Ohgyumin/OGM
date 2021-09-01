@@ -21,6 +21,10 @@
       <td>제목</td>
       <td><input type="text" name="title"></td>
    </tr>
+    <tr>
+      <td>아이디</td>
+      <td><input type="text" name="m_id"></td>
+   </tr>
    <tr>
       <td>내용</td>
       <td><input type="text" name="content"></td>

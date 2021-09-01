@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.common.JDBC;
+import model.member.MemberVO;
 
 public class MessageDAO {
 
@@ -20,6 +21,7 @@ public class MessageDAO {
 			while(rs.next()){ // 데이터 불러오기
 				MessageVO vo=new MessageVO();
 				vo.setContent(rs.getString("content"));
+				vo.setM_id(rs.getString("m_id"));
 				vo.setMnum(rs.getInt("mnum"));
 				vo.setTitle(rs.getString("title"));
 				vo.setWdate(rs.getDate("wdate"));
@@ -38,7 +40,37 @@ public class MessageDAO {
 		
 		return datas;
 	}
-
+	
+	public ArrayList<MessageVO> selectAll(MemberVO vo) {
+		Connection conn=JDBC.connect();
+		ArrayList<MessageVO> datas=new ArrayList();  // 받아올 data를 생성
+		PreparedStatement pstmt=null;
+		try{
+			String sql = "select * from message where m_id = ? order by mnum desc";;
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getM_id());
+			ResultSet rs=pstmt.executeQuery(); // ResultSet 생성
+			while(rs.next()){ // 데이터 불러오기
+				MessageVO data=new MessageVO();
+				data.setContent(rs.getString("content"));
+				data.setM_id(rs.getString("m_id"));
+				data.setMnum(rs.getInt("mnum"));
+				data.setTitle(rs.getString("title"));
+				data.setWdate(rs.getDate("wdate"));
+				data.setWriter(rs.getString("writer"));
+				datas.add(data); // ArrayList에 추가
+			}
+			rs.close();
+		}
+		catch(Exception e){
+			System.out.println("getDBData()에서 출력");
+			e.printStackTrace();
+		}
+		finally {
+			JDBC.disconnect(pstmt,conn);
+		}
+		return datas;
+	}
 	public MessageVO getDBData(MessageVO vo){
 		Connection conn=JDBC.connect();
 		MessageVO data=null;  // 받아올 data를 생성
@@ -52,6 +84,7 @@ public class MessageDAO {
 				data=new MessageVO();
 				data.setContent(rs.getString("content"));
 				data.setMnum(rs.getInt("mnum"));
+				data.setM_id(rs.getString("m_id"));
 				data.setTitle(rs.getString("title"));
 				data.setWdate(rs.getDate("wdate"));
 				data.setWriter(rs.getString("writer"));
@@ -73,11 +106,12 @@ public class MessageDAO {
 		boolean res=false;
 		PreparedStatement pstmt=null;
 		try{
-			String sql="insert into message values((select nvl(max(mnum),0)+1 from message),?,?,?,sysdate)";
+			String sql="insert into message values((select nvl(max(mnum),0)+1 from message),?,?,?,?,sysdate)";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getWriter());
 			pstmt.setString(2, vo.getTitle());
-			pstmt.setString(3, vo.getContent());
+			pstmt.setString(3, vo.getM_id());
+			pstmt.setString(4, vo.getContent());
 			pstmt.executeUpdate();
 			res=true;
 		}
@@ -119,12 +153,13 @@ public class MessageDAO {
 		boolean res=false;
 		PreparedStatement pstmt=null;
 		try{
-			String sql="update message set writer=?, title=?, content=?, wdate=sysdate where mnum=?";
+			String sql="update message set writer=?, title=?, m_id=?, content=?, wdate=sysdate where mnum=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getWriter());
 			pstmt.setString(2, vo.getTitle());
-			pstmt.setString(3, vo.getContent());
-			pstmt.setInt(4, vo.getMnum());
+			pstmt.setString(3, vo.getM_id());
+			pstmt.setString(4, vo.getContent());
+			pstmt.setInt(5, vo.getMnum());
 			pstmt.executeUpdate();
 			res=true; // 업데이트가 됐으므로 true
 		}

@@ -38,6 +38,10 @@
 		<td><input type="text" name="writer" value="<%=data.getWriter()%>"></td>
 	</tr>
 	<tr>
+		<td>아이디</td>
+		<td><input type="text" name="m_id" value="<%=data.getM_id()%>"></td>
+	</tr>
+	<tr>
 		<td>제목</td>
 		<td><input type="text" name="title" value="<%=data.getTitle()%>"></td>
 	</tr>

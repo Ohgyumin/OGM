@@ -8,5 +8,12 @@
 </head>
 <body>
 
+<form action="control.jsp" method="post">
+<input type="hidden" name="action" value="login">
+<input type="text" name="mid">
+<input type="password" name="mpw">
+<input type="submit" value="로그인">
+</form>
+
 </body>
 </html>

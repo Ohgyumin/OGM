@@ -6,13 +6,12 @@
 <head>
 <title>Elements - Solid State by HTML5 UP</title>
 <script type="text/javascript">
-	function del(){
-		result=confirm("정말로 삭제하시겠습니까?");
-		if(result==true){
-			document.form1.action.value="delete";
+	function del() {
+		result = confirm("정말로 삭제하시겠습니까?");
+		if (result == true) {
+			document.form1.action.value = "delete";
 			document.form1.submit();
-		}
-		else{
+		} else {
 			return;
 		}
 	}
@@ -25,7 +24,7 @@
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
 </head>
-<body class="is-preload">
+<body>
 
 <a href="control.jsp?action=list">메인으로 돌아가기</a>
 <hr>
@@ -42,6 +41,10 @@
 		<td><input type="text" name="title" value="<%=data.getTitle()%>"></td>
 	</tr>
 	<tr>
+		<td>아이디</td>
+		<td><input type="text" name="m_id" value="<%=data.getM_id()%>"></td>
+	</tr>
+	<tr>
 		<td>내용</td>
 		<td><input type="text" name="content" value="<%=data.getContent()%>"></td>
 	</tr>
@@ -55,14 +58,4 @@
 	</tr>
 </table>
 </form>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
-</body>
 </html>

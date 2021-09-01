@@ -6,6 +6,7 @@ public class MessageVO {
 	// sql의 변수명과 통일!
 	int mnum;
 	String writer;
+	String m_id;
 	String title;
 	String content;
 	Date wdate;
@@ -41,10 +42,17 @@ public class MessageVO {
 	public void setWdate(Date wdate) {
 		this.wdate = wdate;
 	}
+	
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 	@Override
 	public String toString() {
-		return "MessageVO [mnum=" + mnum + ", writer=" + writer + ", title=" + title + ", content=" + content
-				+ ", wdate=" + wdate + "]";
+		return "MessageVO [mnum=" + mnum + ", writer=" + writer + ", m_id=" + m_id + ", title=" + title + ", content="
+				+ content + ", wdate=" + wdate + "]";
 	}
 	
 	

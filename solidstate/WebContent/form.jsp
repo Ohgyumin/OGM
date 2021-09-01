@@ -10,7 +10,6 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 <body class="is-preload">
-<div id="page-wrapper">
 <a href="control.jsp?action=list">메인으로 돌아가기</a>
 <hr>
 <form action="control.jsp" method="post" name="form1">
@@ -19,6 +18,10 @@
    <tr>
       <td>작성자</td>
       <td><input type="text" name="writer"></td>
+   </tr>
+   <tr>
+      <td>아이디</td>
+      <td><input type="text" name="m_id"></td>
    </tr>
    <tr>
       <td>제목</td>
